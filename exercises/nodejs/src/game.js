@@ -1,33 +1,33 @@
 import generator from 'random-seed'
 
 var Game = function () {
-  var players = new Array()
+  var players = []
   var places = new Array(6)
   var purses = new Array(6)
   var inPenaltyBox = new Array(6)
 
-  var popQuestions = new Array()
-  var scienceQuestions = new Array()
-  var sportsQuestions = new Array()
-  var rockQuestions = new Array()
+  var popQuestions = []
+  var scienceQuestions = []
+  var sportsQuestions = []
+  var rockQuestions = []
 
   var currentPlayer = 0
   var isGettingOutOfPenaltyBox = false
 
   var didPlayerWin = function () {
-    return !(purses[currentPlayer] == 6)
+    return !(purses[currentPlayer] === 6)
   }
 
   var currentCategory = function () {
-    if (places[currentPlayer] == 0) { return 'Pop' }
-    if (places[currentPlayer] == 4) { return 'Pop' }
-    if (places[currentPlayer] == 8) { return 'Pop' }
-    if (places[currentPlayer] == 1) { return 'Science' }
-    if (places[currentPlayer] == 5) { return 'Science' }
-    if (places[currentPlayer] == 9) { return 'Science' }
-    if (places[currentPlayer] == 2) { return 'Sports' }
-    if (places[currentPlayer] == 6) { return 'Sports' }
-    if (places[currentPlayer] == 10) { return 'Sports' }
+    if (places[currentPlayer] === 0) { return 'Pop' }
+    if (places[currentPlayer] === 4) { return 'Pop' }
+    if (places[currentPlayer] === 8) { return 'Pop' }
+    if (places[currentPlayer] === 1) { return 'Science' }
+    if (places[currentPlayer] === 5) { return 'Science' }
+    if (places[currentPlayer] === 9) { return 'Science' }
+    if (places[currentPlayer] === 2) { return 'Sports' }
+    if (places[currentPlayer] === 6) { return 'Sports' }
+    if (places[currentPlayer] === 10) { return 'Sports' }
     return 'Rock'
   }
 
@@ -63,10 +63,10 @@ var Game = function () {
   }
 
   var askQuestion = function () {
-    if (currentCategory() == 'Pop') { console.log(popQuestions.shift()) }
-    if (currentCategory() == 'Science') { console.log(scienceQuestions.shift()) }
-    if (currentCategory() == 'Sports') { console.log(sportsQuestions.shift()) }
-    if (currentCategory() == 'Rock') { console.log(rockQuestions.shift()) }
+    if (currentCategory() === 'Pop') { console.log(popQuestions.shift()) }
+    if (currentCategory() === 'Science') { console.log(scienceQuestions.shift()) }
+    if (currentCategory() === 'Sports') { console.log(sportsQuestions.shift()) }
+    if (currentCategory() === 'Rock') { console.log(rockQuestions.shift()) }
   }
 
   this.roll = function (roll) {
@@ -74,7 +74,7 @@ var Game = function () {
     console.log('They have rolled a ' + roll)
 
     if (inPenaltyBox[currentPlayer]) {
-      if (roll % 2 != 0) {
+      if (roll % 2 !== 0) {
         isGettingOutOfPenaltyBox = true
 
         console.log(players[currentPlayer] + ' is getting out of the penalty box')
@@ -103,6 +103,7 @@ var Game = function () {
   }
 
   this.wasCorrectlyAnswered = function () {
+    let winner
     if (inPenaltyBox[currentPlayer]) {
       if (isGettingOutOfPenaltyBox) {
         console.log('Answer was correct!!!!')
@@ -110,14 +111,14 @@ var Game = function () {
         console.log(players[currentPlayer] + ' now has ' +
             purses[currentPlayer] + ' Gold Coins.')
 
-        var winner = didPlayerWin()
+        winner = didPlayerWin()
         currentPlayer += 1
-        if (currentPlayer == players.length) { currentPlayer = 0 }
+        if (currentPlayer === players.length) { currentPlayer = 0 }
 
         return winner
       } else {
         currentPlayer += 1
-        if (currentPlayer == players.length) { currentPlayer = 0 }
+        if (currentPlayer === players.length) { currentPlayer = 0 }
         return true
       }
     } else {
@@ -127,10 +128,10 @@ var Game = function () {
       console.log(players[currentPlayer] + ' now has ' +
           purses[currentPlayer] + ' Gold Coins.')
 
-      var winner = didPlayerWin()
+      winner = didPlayerWin()
 
       currentPlayer += 1
-      if (currentPlayer == players.length) { currentPlayer = 0 }
+      if (currentPlayer === players.length) { currentPlayer = 0 }
 
       return winner
     }
@@ -142,7 +143,7 @@ var Game = function () {
     inPenaltyBox[currentPlayer] = true
 
     currentPlayer += 1
-    if (currentPlayer == players.length) { currentPlayer = 0 }
+    if (currentPlayer === players.length) { currentPlayer = 0 }
     return true
   }
 }
@@ -161,7 +162,7 @@ const gameRunner = (i) => {
   do {
     game.roll(random.range(5) + 1)
 
-    if (random.range(9) == 7) {
+    if (random.range(9) === 7) {
       notAWinner = game.wrongAnswer()
     } else {
       notAWinner = game.wasCorrectlyAnswered()
