@@ -4,6 +4,11 @@ import { Players } from './Players'
 import { Questions } from './Questions'
 
 var Game = function () {
+  const POP_CATEGORY = 'Pop'
+  const SCIENCE_CATEGORY = 'Science'
+  const SPORTS_CATEGORY = 'Sports'
+  const ROCK_CATEGORY = 'Rock'
+
   const players = new Players()
   const questions = new Questions()
 
@@ -13,16 +18,16 @@ var Game = function () {
   var currentCategory = function () {
     const player = players.getPlayer(currentPlayer)
     const currentPlace = player.position
-    if (currentPlace === 0) { return 'Pop' }
-    if (currentPlace === 1) { return 'Science' }
-    if (currentPlace === 2) { return 'Sports' }
-    if (currentPlace === 4) { return 'Pop' }
-    if (currentPlace === 5) { return 'Science' }
-    if (currentPlace === 6) { return 'Sports' }
-    if (currentPlace === 8) { return 'Pop' }
-    if (currentPlace === 9) { return 'Science' }
-    if (currentPlace === 10) { return 'Sports' }
-    return 'Rock'
+    if (currentPlace === 0) { return POP_CATEGORY }
+    if (currentPlace === 1) { return SCIENCE_CATEGORY }
+    if (currentPlace === 2) { return SPORTS_CATEGORY }
+    if (currentPlace === 4) { return POP_CATEGORY }
+    if (currentPlace === 5) { return SCIENCE_CATEGORY }
+    if (currentPlace === 6) { return SPORTS_CATEGORY }
+    if (currentPlace === 8) { return POP_CATEGORY }
+    if (currentPlace === 9) { return SCIENCE_CATEGORY }
+    if (currentPlace === 10) { return SPORTS_CATEGORY }
+    return ROCK_CATEGORY
   }
 
   this.isPlayable = function (howManyPlayers) {
@@ -35,10 +40,10 @@ var Game = function () {
   }
 
   var askQuestion = function () {
-    if (currentCategory() === 'Pop') { console.log(questions.popQuestions.shift()) }
-    if (currentCategory() === 'Science') { console.log(questions.scienceQuestions.shift()) }
-    if (currentCategory() === 'Sports') { console.log(questions.sportsQuestions.shift()) }
-    if (currentCategory() === 'Rock') { console.log(questions.rockQuestions.shift()) }
+    if (currentCategory() === POP_CATEGORY) { console.log(questions.popQuestions.shift()) }
+    if (currentCategory() === SCIENCE_CATEGORY) { console.log(questions.scienceQuestions.shift()) }
+    if (currentCategory() === SPORTS_CATEGORY) { console.log(questions.sportsQuestions.shift()) }
+    if (currentCategory() === ROCK_CATEGORY) { console.log(questions.rockQuestions.shift()) }
   }
 
   this.turn = function (roll) {
@@ -144,3 +149,5 @@ const gameRunner = (i) => {
 }
 
 export default gameRunner
+
+
