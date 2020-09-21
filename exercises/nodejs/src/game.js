@@ -99,8 +99,8 @@ var Game = function () {
     let player = players.getPlayer(currentPlayer)
     if (player.inPenaltyBox) {
       if (isGettingOutOfPenaltyBox) {
+        player.correctAnswer()
         console.log('Answer was correct!!!!')
-        player.purse += 1
         console.log(
           player.name +
             ' now has ' +
@@ -119,10 +119,8 @@ var Game = function () {
         return true
       }
     } else {
+      player.correctAnswer();
       console.log('Answer was correct!!!!')
-
-      player = players.getPlayer(currentPlayer)
-      player.purse += 1
       console.log(
         player.name +
           ' now has ' +

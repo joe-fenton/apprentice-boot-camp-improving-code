@@ -5,4 +5,8 @@ export class Player {
     this.purse = purse;
     this.inPenaltyBox = inPenaltyBox;
   }
+
+  correctAnswer(){
+    this.purse += 1
+  }
 }
