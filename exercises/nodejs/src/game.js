@@ -10,10 +10,6 @@ var Game = function () {
   var currentPlayer = 0
   var isGettingOutOfPenaltyBox = false
 
-  var didPlayerWin = function (player) {
-    return !(player.purse === 6)
-  }
-
   var currentCategory = function () {
     const player = players.getPlayer(currentPlayer)
     const currentPlace = player.place
@@ -103,7 +99,7 @@ var Game = function () {
   this.correctAnswerWhileAbleToScore = (player) => {
     player.correctAnswer()
     this.nextPlayer()
-    return didPlayerWin(player)
+    return player.didPlayerWin()
   }
 
   this.wasCorrectlyAnswered = function () {

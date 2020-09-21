@@ -15,4 +15,8 @@ export class Player {
     console.log('Answer was correct!!!!')
     console.log(this.name + ' now has ' + this.purse + ' Gold Coins.')
   }
+
+  didPlayerWin () {
+    return !(this.purse === 6)
+  }
 }
