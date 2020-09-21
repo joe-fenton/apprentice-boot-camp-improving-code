@@ -98,7 +98,6 @@ var Game = function () {
 
   this.correctAnswerWhileAbleToScore = (player) => {
     player.correctAnswer()
-    this.nextPlayer()
   }
 
   this.wasCorrectlyAnswered = function () {
@@ -106,15 +105,12 @@ var Game = function () {
     if (player.inPenaltyBox) {
       if (isGettingOutOfPenaltyBox) {
         this.correctAnswerWhileAbleToScore(player)
-        return player.didPlayerWin()
-      } else {
-        this.nextPlayer()
-        return player.didPlayerWin()
       }
     } else {
       this.correctAnswerWhileAbleToScore(player)
-      return player.didPlayerWin()
     }
+    this.nextPlayer()
+    return player.didPlayerWin()
   }
 
   this.wrongAnswer = function () {
