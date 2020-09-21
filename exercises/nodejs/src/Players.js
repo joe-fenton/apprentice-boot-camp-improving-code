@@ -3,8 +3,10 @@ export class Players {
     this.players = [];
   }
 
-  add(name) {
-    this.players.push(name);
+  add(player) {
+    this.players.push(player);
+    console.log(player.name + " was added");
+    console.log("They are player number " + this.players.length);
   }
 
   numberOfPlayers() {

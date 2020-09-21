@@ -51,9 +51,6 @@ var Game = function () {
   this.add = function (playerName) {
     const player = new Player(playerName, 0, 0, false)
     players.add(player)
-
-    console.log(playerName + ' was added')
-    console.log('They are player number ' + players.numberOfPlayers())
   }
 
   var askQuestion = function () {
