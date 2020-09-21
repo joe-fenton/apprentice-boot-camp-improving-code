@@ -98,6 +98,13 @@ var Game = function () {
     console.log(player.name + " now has " + player.purse + " Gold Coins.");
   }
 
+  this.nextPlayer = () => {
+    currentPlayer += 1;
+    if (currentPlayer === players.numberOfPlayers()) {
+      currentPlayer = 0;
+    }
+  }
+
   this.wasCorrectlyAnswered = function () {
     let player = players.getPlayer(currentPlayer)
     if (player.inPenaltyBox) {
@@ -105,8 +112,7 @@ var Game = function () {
         player.correctAnswer()
         this.logPlayerPurseState(player)
 
-        currentPlayer += 1
-        if (currentPlayer === players.numberOfPlayers()) { currentPlayer = 0 }
+        this.nextPlayer()
 
         return didPlayerWin(player);
       } else {
@@ -118,8 +124,7 @@ var Game = function () {
       player.correctAnswer();
       this.logPlayerPurseState(player)
 
-      currentPlayer += 1
-      if (currentPlayer === players.numberOfPlayers()) { currentPlayer = 0 }
+      this.nextPlayer()
 
       return didPlayerWin(player);
     }
