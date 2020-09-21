@@ -8,5 +8,11 @@ export class Player {
 
   correctAnswer () {
     this.purse += 1
+    this.logPlayerPurseState()
+  }
+
+  logPlayerPurseState () {
+    console.log('Answer was correct!!!!')
+    console.log(this.name + ' now has ' + this.purse + ' Gold Coins.')
   }
 }

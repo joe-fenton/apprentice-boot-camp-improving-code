@@ -93,11 +93,6 @@ var Game = function () {
     }
   }
 
-  this.logPlayerPurseState = (player) => {
-    console.log('Answer was correct!!!!')
-    console.log(player.name + ' now has ' + player.purse + ' Gold Coins.')
-  }
-
   this.nextPlayer = () => {
     currentPlayer += 1
     if (currentPlayer === players.numberOfPlayers()) {
@@ -107,7 +102,6 @@ var Game = function () {
 
   this.correctAnswerWhileAbleToScore = (player) => {
     player.correctAnswer()
-    this.logPlayerPurseState(player)
     this.nextPlayer()
     return didPlayerWin(player)
   }
