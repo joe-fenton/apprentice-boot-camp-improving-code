@@ -10,8 +10,7 @@ var Game = function () {
   var currentPlayer = 0
   var isGettingOutOfPenaltyBox = false
 
-  var didPlayerWin = function () {
-    const player = players.getPlayer(currentPlayer)
+  var didPlayerWin = function (player) {
     return !(player.purse === 6)
   }
 
@@ -100,18 +99,16 @@ var Game = function () {
   }
 
   this.wasCorrectlyAnswered = function () {
-    let winner
     let player = players.getPlayer(currentPlayer)
     if (player.inPenaltyBox) {
       if (isGettingOutOfPenaltyBox) {
         player.correctAnswer()
         this.logPlayerPurseState(player)
 
-        winner = didPlayerWin()
         currentPlayer += 1
         if (currentPlayer === players.numberOfPlayers()) { currentPlayer = 0 }
 
-        return winner
+        return didPlayerWin(player);
       } else {
         currentPlayer += 1
         if (currentPlayer === players.numberOfPlayers()) { currentPlayer = 0 }
@@ -121,12 +118,10 @@ var Game = function () {
       player.correctAnswer();
       this.logPlayerPurseState(player)
 
-      winner = didPlayerWin()
-
       currentPlayer += 1
       if (currentPlayer === players.numberOfPlayers()) { currentPlayer = 0 }
 
-      return winner
+      return didPlayerWin(player);
     }
   }
 
