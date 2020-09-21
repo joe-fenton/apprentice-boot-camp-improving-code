@@ -54,8 +54,6 @@ var Game = function () {
 
     console.log(playerName + ' was added')
     console.log('They are player number ' + players.numberOfPlayers())
-
-    return true
   }
 
   var askQuestion = function () {
