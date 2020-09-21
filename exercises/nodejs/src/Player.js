@@ -1,3 +1,4 @@
+const WINNING_COINS = 6
 export class Player {
   constructor (name, place, purse, inPenaltyBox) {
     this.name = name
@@ -17,6 +18,6 @@ export class Player {
   }
 
   didPlayerWin () {
-    return !(this.purse === 6)
+    return !(this.purse === WINNING_COINS)
   }
 }
