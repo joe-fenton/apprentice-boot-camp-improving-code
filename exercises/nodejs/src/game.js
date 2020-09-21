@@ -109,7 +109,7 @@ var Game = function () {
         return player.didPlayerWin()
       } else {
         this.nextPlayer()
-        return false
+        return player.didPlayerWin()
       }
     } else {
       this.correctAnswerWhileAbleToScore(player)
@@ -126,7 +126,7 @@ var Game = function () {
     player.inPenaltyBox = true
 
     this.nextPlayer()
-    return false
+    return player.didPlayerWin()
   }
 }
 
