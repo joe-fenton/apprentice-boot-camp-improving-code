@@ -1,12 +1,12 @@
 import generator from 'random-seed'
 import { Player } from './Player'
 import { Players } from './Players'
-import { Questions } from './Questions';
+import { Questions } from './Questions'
 
 var Game = function () {
   const players = new Players()
   const questions = new Questions()
-  
+
   var currentPlayer = 0
   var isGettingOutOfPenaltyBox = false
 
@@ -80,7 +80,7 @@ var Game = function () {
     } else {
       player.place += roll
       if (player.place > 11) {
-        player.place -= 12;
+        player.place -= 12
       }
 
       console.log(
@@ -94,19 +94,19 @@ var Game = function () {
   }
 
   this.logPlayerPurseState = (player) => {
-    console.log("Answer was correct!!!!");
-    console.log(player.name + " now has " + player.purse + " Gold Coins.");
+    console.log('Answer was correct!!!!')
+    console.log(player.name + ' now has ' + player.purse + ' Gold Coins.')
   }
 
   this.nextPlayer = () => {
-    currentPlayer += 1;
+    currentPlayer += 1
     if (currentPlayer === players.numberOfPlayers()) {
-      currentPlayer = 0;
+      currentPlayer = 0
     }
   }
 
   this.wasCorrectlyAnswered = function () {
-    let player = players.getPlayer(currentPlayer)
+    const player = players.getPlayer(currentPlayer)
     if (player.inPenaltyBox) {
       if (isGettingOutOfPenaltyBox) {
         player.correctAnswer()
@@ -114,19 +114,19 @@ var Game = function () {
 
         this.nextPlayer()
 
-        return didPlayerWin(player);
+        return didPlayerWin(player)
       } else {
         currentPlayer += 1
         if (currentPlayer === players.numberOfPlayers()) { currentPlayer = 0 }
         return true
       }
     } else {
-      player.correctAnswer();
+      player.correctAnswer()
       this.logPlayerPurseState(player)
 
       this.nextPlayer()
 
-      return didPlayerWin(player);
+      return didPlayerWin(player)
     }
   }
 
