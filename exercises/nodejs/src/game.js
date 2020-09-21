@@ -2,6 +2,10 @@ import generator from 'random-seed'
 import { Player } from './Player'
 import { Players } from './Players'
 
+class Questions{
+  constructor(){}
+}
+
 var Game = function () {
   var players = new Players()
 
@@ -22,26 +26,22 @@ var Game = function () {
     const player = players.getPlayer(currentPlayer)
     const currentPlace = player.place
     if (currentPlace === 0) { return 'Pop' }
-    if (currentPlace === 4) { return 'Pop' }
-    if (currentPlace === 8) { return 'Pop' }
     if (currentPlace === 1) { return 'Science' }
-    if (currentPlace === 5) { return 'Science' }
-    if (currentPlace === 9) { return 'Science' }
     if (currentPlace === 2) { return 'Sports' }
+    if (currentPlace === 4) { return 'Pop' }
+    if (currentPlace === 5) { return 'Science' }
     if (currentPlace === 6) { return 'Sports' }
+    if (currentPlace === 8) { return 'Pop' }
+    if (currentPlace === 9) { return 'Science' }
     if (currentPlace === 10) { return 'Sports' }
     return 'Rock'
   }
 
-  this.createRockQuestion = function (index) {
-    return 'Rock Question ' + index
-  }
-
   for (var i = 0; i < 50; i++) {
-    popQuestions.push('Pop Question ' + i)
-    scienceQuestions.push('Science Question ' + i)
-    sportsQuestions.push('Sports Question ' + i)
-    rockQuestions.push(this.createRockQuestion(i))
+    popQuestions.push(`Pop Question ${i}`)
+    scienceQuestions.push(`Science Question ${i}`);
+    sportsQuestions.push(`Sports Question ${i}`);
+    rockQuestions.push(`Rock Question ${i}`);
   }
 
   this.isPlayable = function (howManyPlayers) {
