@@ -1,28 +1,9 @@
 import generator from 'random-seed'
-
-class Players {
-  constructor () {
-    this.players = []
-  }
-
-  add (name) {
-    this.players.push(name)
-  }
-
-  numberOfPlayers () {
-    return this.players.length
-  }
-
-  getPlayer (position) {
-    return this.players[position]
-  }
-}
+import { Player } from './Player'
+import { Players } from './Players'
 
 var Game = function () {
   var players = new Players()
-  var places = new Array(6)
-  var purses = new Array(6)
-  var inPenaltyBox = new Array(6)
 
   var popQuestions = []
   var scienceQuestions = []
@@ -33,19 +14,22 @@ var Game = function () {
   var isGettingOutOfPenaltyBox = false
 
   var didPlayerWin = function () {
-    return !(purses[currentPlayer] === 6)
+    const player = players.getPlayer(currentPlayer)
+    return !(player.purse === 6)
   }
 
   var currentCategory = function () {
-    if (places[currentPlayer] === 0) { return 'Pop' }
-    if (places[currentPlayer] === 4) { return 'Pop' }
-    if (places[currentPlayer] === 8) { return 'Pop' }
-    if (places[currentPlayer] === 1) { return 'Science' }
-    if (places[currentPlayer] === 5) { return 'Science' }
-    if (places[currentPlayer] === 9) { return 'Science' }
-    if (places[currentPlayer] === 2) { return 'Sports' }
-    if (places[currentPlayer] === 6) { return 'Sports' }
-    if (places[currentPlayer] === 10) { return 'Sports' }
+    const player = players.getPlayer(currentPlayer)
+    const currentPlace = player.place
+    if (currentPlace === 0) { return 'Pop' }
+    if (currentPlace === 4) { return 'Pop' }
+    if (currentPlace === 8) { return 'Pop' }
+    if (currentPlace === 1) { return 'Science' }
+    if (currentPlace === 5) { return 'Science' }
+    if (currentPlace === 9) { return 'Science' }
+    if (currentPlace === 2) { return 'Sports' }
+    if (currentPlace === 6) { return 'Sports' }
+    if (currentPlace === 10) { return 'Sports' }
     return 'Rock'
   }
 
@@ -65,10 +49,8 @@ var Game = function () {
   }
 
   this.add = function (playerName) {
-    players.add(playerName)
-    places[players.numberOfPlayers() - 1] = 0
-    purses[players.numberOfPlayers() - 1] = 0
-    inPenaltyBox[players.numberOfPlayers() - 1] = false
+    const player = new Player(playerName, 0, 0, false)
+    players.add(player)
 
     console.log(playerName + ' was added')
     console.log('They are player number ' + players.numberOfPlayers())
@@ -84,46 +66,47 @@ var Game = function () {
   }
 
   this.roll = function (roll) {
-    console.log(players.getPlayer(currentPlayer) + ' is the current player')
+    const player = players.getPlayer(currentPlayer)
+    console.log(player.name + ' is the current player')
     console.log('They have rolled a ' + roll)
 
-    if (inPenaltyBox[currentPlayer]) {
+    if (player.inPenaltyBox) {
       if (roll % 2 !== 0) {
         isGettingOutOfPenaltyBox = true
 
         console.log(
-          players.getPlayer(currentPlayer) +
+          player.name +
             ' is getting out of the penalty box'
         )
-        places[currentPlayer] = places[currentPlayer] + roll
-        if (places[currentPlayer] > 11) {
-          places[currentPlayer] = places[currentPlayer] - 12
+        player.place += roll
+        if (player.place > 11) {
+          player.place -= 12
         }
 
         console.log(
-          players.getPlayer(currentPlayer) +
+          player.name +
             "'s new location is " +
-            places[currentPlayer]
+            player.place
         )
         console.log('The category is ' + currentCategory())
         askQuestion()
       } else {
         console.log(
-          players.getPlayer(currentPlayer) +
+          player.name +
             ' is not getting out of the penalty box'
         )
         isGettingOutOfPenaltyBox = false
       }
     } else {
-      places[currentPlayer] = places[currentPlayer] + roll
-      if (places[currentPlayer] > 11) {
-        places[currentPlayer] = places[currentPlayer] - 12
+      player.place += roll
+      if (player.place > 11) {
+        player.place -= 12;
       }
 
       console.log(
-        players.getPlayer(currentPlayer) +
+        player.name +
           "'s new location is " +
-          places[currentPlayer]
+          player.place
       )
       console.log('The category is ' + currentCategory())
       askQuestion()
@@ -132,14 +115,15 @@ var Game = function () {
 
   this.wasCorrectlyAnswered = function () {
     let winner
-    if (inPenaltyBox[currentPlayer]) {
+    let player = players.getPlayer(currentPlayer)
+    if (player.inPenaltyBox) {
       if (isGettingOutOfPenaltyBox) {
         console.log('Answer was correct!!!!')
-        purses[currentPlayer] += 1
+        player.purse += 1
         console.log(
-          players.getPlayer(currentPlayer) +
+          player.name +
             ' now has ' +
-            purses[currentPlayer] +
+            player.purse +
             ' Gold Coins.'
         )
 
@@ -156,11 +140,12 @@ var Game = function () {
     } else {
       console.log('Answer was correct!!!!')
 
-      purses[currentPlayer] += 1
+      player = players.getPlayer(currentPlayer)
+      player.purse += 1
       console.log(
-        players.getPlayer(currentPlayer) +
+        player.name +
           ' now has ' +
-          purses[currentPlayer] +
+          player.purse +
           ' Gold Coins.'
       )
 
@@ -174,11 +159,12 @@ var Game = function () {
   }
 
   this.wrongAnswer = function () {
+    const player = players.getPlayer(currentPlayer)
     console.log('Question was incorrectly answered')
     console.log(
-      players.getPlayer(currentPlayer) + ' was sent to the penalty box'
+      player.name + ' was sent to the penalty box'
     )
-    inPenaltyBox[currentPlayer] = true
+    player.inPenaltyBox = true
 
     currentPlayer += 1
     if (currentPlayer === players.numberOfPlayers()) { currentPlayer = 0 }
