@@ -12,6 +12,12 @@ export class Player {
     this.logPlayerPurseState()
   }
 
+  incorrectAnswer () {
+    console.log('Question was incorrectly answered')
+    console.log(this.name + ' was sent to the penalty box')
+    this.inPenaltyBox = true
+  }
+
   logPlayerPurseState () {
     console.log('Answer was correct!!!!')
     console.log(this.name + ' now has ' + this.purse + ' Gold Coins.')

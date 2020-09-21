@@ -29,7 +29,7 @@ var Game = function () {
     return howManyPlayers >= 2
   }
 
-  this.add = function (playerName) {
+  this.addPlayer = function (playerName) {
     const player = new Player(playerName, 0, 0, false)
     players.add(player)
   }
@@ -115,12 +115,7 @@ var Game = function () {
 
   this.wrongAnswer = function () {
     const player = players.getPlayer(currentPlayer)
-    console.log('Question was incorrectly answered')
-    console.log(
-      player.name + ' was sent to the penalty box'
-    )
-    player.inPenaltyBox = true
-
+    player.incorrectAnswer()
     this.nextPlayer()
     return player.didPlayerWin()
   }
@@ -131,9 +126,9 @@ const gameRunner = (i) => {
 
   var game = new Game()
 
-  game.add('Chet')
-  game.add('Pat')
-  game.add('Sue')
+  game.addPlayer('Chet')
+  game.addPlayer('Pat')
+  game.addPlayer('Sue')
 
   const random = generator.create(i)
 
