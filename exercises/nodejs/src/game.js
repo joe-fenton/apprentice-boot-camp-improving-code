@@ -1,19 +1,12 @@
 import generator from 'random-seed'
 import { Player } from './Player'
 import { Players } from './Players'
-
-class Questions{
-  constructor(){}
-}
+import { Questions } from './Questions';
 
 var Game = function () {
-  var players = new Players()
-
-  var popQuestions = []
-  var scienceQuestions = []
-  var sportsQuestions = []
-  var rockQuestions = []
-
+  const players = new Players()
+  const questions = new Questions()
+  
   var currentPlayer = 0
   var isGettingOutOfPenaltyBox = false
 
@@ -37,13 +30,6 @@ var Game = function () {
     return 'Rock'
   }
 
-  for (var i = 0; i < 50; i++) {
-    popQuestions.push(`Pop Question ${i}`)
-    scienceQuestions.push(`Science Question ${i}`);
-    sportsQuestions.push(`Sports Question ${i}`);
-    rockQuestions.push(`Rock Question ${i}`);
-  }
-
   this.isPlayable = function (howManyPlayers) {
     return howManyPlayers >= 2
   }
@@ -54,10 +40,10 @@ var Game = function () {
   }
 
   var askQuestion = function () {
-    if (currentCategory() === 'Pop') { console.log(popQuestions.shift()) }
-    if (currentCategory() === 'Science') { console.log(scienceQuestions.shift()) }
-    if (currentCategory() === 'Sports') { console.log(sportsQuestions.shift()) }
-    if (currentCategory() === 'Rock') { console.log(rockQuestions.shift()) }
+    if (currentCategory() === 'Pop') { console.log(questions.popQuestions.shift()) }
+    if (currentCategory() === 'Science') { console.log(questions.scienceQuestions.shift()) }
+    if (currentCategory() === 'Sports') { console.log(questions.sportsQuestions.shift()) }
+    if (currentCategory() === 'Rock') { console.log(questions.rockQuestions.shift()) }
   }
 
   this.roll = function (roll) {
