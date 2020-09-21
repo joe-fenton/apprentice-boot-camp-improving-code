@@ -94,19 +94,18 @@ var Game = function () {
     }
   }
 
+  this.logPlayerPurseState = (player) => {
+    console.log("Answer was correct!!!!");
+    console.log(player.name + " now has " + player.purse + " Gold Coins.");
+  }
+
   this.wasCorrectlyAnswered = function () {
     let winner
     let player = players.getPlayer(currentPlayer)
     if (player.inPenaltyBox) {
       if (isGettingOutOfPenaltyBox) {
         player.correctAnswer()
-        console.log('Answer was correct!!!!')
-        console.log(
-          player.name +
-            ' now has ' +
-            player.purse +
-            ' Gold Coins.'
-        )
+        this.logPlayerPurseState(player)
 
         winner = didPlayerWin()
         currentPlayer += 1
@@ -120,13 +119,7 @@ var Game = function () {
       }
     } else {
       player.correctAnswer();
-      console.log('Answer was correct!!!!')
-      console.log(
-        player.name +
-          ' now has ' +
-          player.purse +
-          ' Gold Coins.'
-      )
+      this.logPlayerPurseState(player)
 
       winner = didPlayerWin()
 
