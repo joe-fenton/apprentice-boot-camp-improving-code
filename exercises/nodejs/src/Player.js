@@ -18,6 +18,6 @@ export class Player {
   }
 
   didPlayerWin () {
-    return !(this.purse === WINNING_COINS)
+    return (this.purse === WINNING_COINS)
   }
 }

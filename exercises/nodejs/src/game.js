@@ -110,7 +110,7 @@ var Game = function () {
       } else {
         currentPlayer += 1
         if (currentPlayer === players.numberOfPlayers()) { currentPlayer = 0 }
-        return true
+        return false
       }
     } else {
       this.correctAnswerWhileAbleToScore(player)
@@ -128,12 +128,12 @@ var Game = function () {
 
     currentPlayer += 1
     if (currentPlayer === players.numberOfPlayers()) { currentPlayer = 0 }
-    return true
+    return false
   }
 }
 
 const gameRunner = (i) => {
-  var notAWinner = false
+  var gameWon = false
 
   var game = new Game()
 
@@ -147,11 +147,11 @@ const gameRunner = (i) => {
     game.turn(random.range(5) + 1)
 
     if (random.range(9) === 7) {
-      notAWinner = game.wrongAnswer()
+      gameWon = game.wrongAnswer()
     } else {
-      notAWinner = game.wasCorrectlyAnswered()
+      gameWon = game.wasCorrectlyAnswered()
     }
-  } while (notAWinner)
+  } while (!gameWon)
 }
 
 export default gameRunner
