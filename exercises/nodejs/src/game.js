@@ -46,7 +46,7 @@ var Game = function () {
     if (currentCategory() === 'Rock') { console.log(questions.rockQuestions.shift()) }
   }
 
-  this.roll = function (roll) {
+  this.turn = function (roll) {
     const player = players.getPlayer(currentPlayer)
     console.log(player.name + ' is the current player')
     console.log('They have rolled a ' + roll)
@@ -165,7 +165,7 @@ const gameRunner = (i) => {
   const random = generator.create(i)
 
   do {
-    game.roll(random.range(5) + 1)
+    game.turn(random.range(5) + 1)
 
     if (random.range(9) === 7) {
       notAWinner = game.wrongAnswer()
