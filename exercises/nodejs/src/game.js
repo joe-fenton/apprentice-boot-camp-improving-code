@@ -30,7 +30,7 @@ var Game = function () {
     return ROCK_CATEGORY
   }
 
-  this.isPlayable = function (howManyPlayers) {
+  this.gameCanStart = function (howManyPlayers) {
     return howManyPlayers >= 2
   }
 
