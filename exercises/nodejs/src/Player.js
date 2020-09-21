@@ -1,8 +1,8 @@
 const WINNING_COINS = 6
 export class Player {
-  constructor (name, place, purse, inPenaltyBox) {
+  constructor (name, position, purse, inPenaltyBox) {
     this.name = name
-    this.place = place
+    this.position = position
     this.purse = purse
     this.inPenaltyBox = inPenaltyBox
   }

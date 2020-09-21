@@ -12,7 +12,7 @@ var Game = function () {
 
   var currentCategory = function () {
     const player = players.getPlayer(currentPlayer)
-    const currentPlace = player.place
+    const currentPlace = player.position
     if (currentPlace === 0) { return 'Pop' }
     if (currentPlace === 1) { return 'Science' }
     if (currentPlace === 2) { return 'Sports' }
@@ -54,15 +54,15 @@ var Game = function () {
           player.name +
             ' is getting out of the penalty box'
         )
-        player.place += roll
-        if (player.place > 11) {
-          player.place -= 12
+        player.position += roll
+        if (player.position > 11) {
+          player.position -= 12
         }
 
         console.log(
           player.name +
             "'s new location is " +
-            player.place
+            player.position
         )
         console.log('The category is ' + currentCategory())
         askQuestion()
@@ -74,15 +74,15 @@ var Game = function () {
         isGettingOutOfPenaltyBox = false
       }
     } else {
-      player.place += roll
-      if (player.place > 11) {
-        player.place -= 12
+      player.position += roll
+      if (player.position > 11) {
+        player.position -= 12
       }
 
       console.log(
         player.name +
           "'s new location is " +
-          player.place
+          player.position
       )
       console.log('The category is ' + currentCategory())
       askQuestion()
