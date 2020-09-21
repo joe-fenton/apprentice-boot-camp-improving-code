@@ -99,21 +99,22 @@ var Game = function () {
   this.correctAnswerWhileAbleToScore = (player) => {
     player.correctAnswer()
     this.nextPlayer()
-    return player.didPlayerWin()
   }
 
   this.wasCorrectlyAnswered = function () {
     const player = players.getPlayer(currentPlayer)
     if (player.inPenaltyBox) {
       if (isGettingOutOfPenaltyBox) {
-        return this.correctAnswerWhileAbleToScore(player)
+        this.correctAnswerWhileAbleToScore(player)
+        return player.didPlayerWin()
       } else {
         currentPlayer += 1
         if (currentPlayer === players.numberOfPlayers()) { currentPlayer = 0 }
         return true
       }
     } else {
-      return this.correctAnswerWhileAbleToScore(player)
+      this.correctAnswerWhileAbleToScore(player)
+      return player.didPlayerWin()
     }
   }
 
