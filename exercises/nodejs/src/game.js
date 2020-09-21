@@ -108,8 +108,7 @@ var Game = function () {
         this.correctAnswerWhileAbleToScore(player)
         return player.didPlayerWin()
       } else {
-        currentPlayer += 1
-        if (currentPlayer === players.numberOfPlayers()) { currentPlayer = 0 }
+        this.nextPlayer()
         return false
       }
     } else {
@@ -126,8 +125,7 @@ var Game = function () {
     )
     player.inPenaltyBox = true
 
-    currentPlayer += 1
-    if (currentPlayer === players.numberOfPlayers()) { currentPlayer = 0 }
+    this.nextPlayer()
     return false
   }
 }
