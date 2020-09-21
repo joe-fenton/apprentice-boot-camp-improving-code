@@ -105,28 +105,25 @@ var Game = function () {
     }
   }
 
+  this.correctAnswerWhileAbleToScore = (player) => {
+    player.correctAnswer()
+    this.logPlayerPurseState(player)
+    this.nextPlayer()
+    return didPlayerWin(player)
+  }
+
   this.wasCorrectlyAnswered = function () {
     const player = players.getPlayer(currentPlayer)
     if (player.inPenaltyBox) {
       if (isGettingOutOfPenaltyBox) {
-        player.correctAnswer()
-        this.logPlayerPurseState(player)
-
-        this.nextPlayer()
-
-        return didPlayerWin(player)
+        return this.correctAnswerWhileAbleToScore(player)
       } else {
         currentPlayer += 1
         if (currentPlayer === players.numberOfPlayers()) { currentPlayer = 0 }
         return true
       }
     } else {
-      player.correctAnswer()
-      this.logPlayerPurseState(player)
-
-      this.nextPlayer()
-
-      return didPlayerWin(player)
+      return this.correctAnswerWhileAbleToScore(player)
     }
   }
 
