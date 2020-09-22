@@ -53,18 +53,14 @@ var Game = function () {
     }
   }
 
-  this.correctAnswerWhileAbleToScore = (player) => {
-    player.correctAnswer()
-  }
-
   this.wasCorrectlyAnswered = function () {
     const player = players.getPlayer(currentPlayer)
     if (player.inPenaltyBox) {
       if (player.isGettingOutOfThePenaltyBox) {
-        this.correctAnswerWhileAbleToScore(player)
+        player.correctAnswer()
       }
     } else {
-      this.correctAnswerWhileAbleToScore(player)
+      player.correctAnswer()
     }
     this.nextPlayer()
     return player.didPlayerWin()
