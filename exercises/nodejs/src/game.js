@@ -2,13 +2,9 @@ import generator from 'random-seed'
 import { Player } from './Player'
 import { Players } from './Players'
 import { Questions } from './Questions'
+import { POP_CATEGORY, SCIENCE_CATEGORY, SPORTS_CATEGORY, ROCK_CATEGORY } from './Categories'
 
 var Game = function () {
-  const POP_CATEGORY = 'Pop'
-  const SCIENCE_CATEGORY = 'Science'
-  const SPORTS_CATEGORY = 'Sports'
-  const ROCK_CATEGORY = 'Rock'
-
   const players = new Players()
   const questions = new Questions()
 
