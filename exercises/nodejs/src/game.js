@@ -41,17 +41,19 @@ var Game = function () {
     if (player.inPenaltyBox) {
       if (roll % 2 !== 0) {
         player.gettingOutOfThePenaltyBox(true)
-        player.rollDice(roll)
-        console.log('The category is ' + currentCategory())
-        askQuestion()
+        this.movePlayer(player, roll)
       } else {
         player.gettingOutOfThePenaltyBox(false)
       }
     } else {
-      player.rollDice(roll)
-      console.log('The category is ' + currentCategory())
-      askQuestion()
+      this.movePlayer(player, roll)
     }
+  }
+
+  this.movePlayer = (player, roll) => {
+    player.rollDice(roll)
+    console.log('The category is ' + currentCategory())
+    askQuestion()
   }
 
   this.nextPlayer = () => {
