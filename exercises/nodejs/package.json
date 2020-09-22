@@ -5,7 +5,7 @@
   "main": "game.js",
   "scripts": {
     "lint": "standard --fix",
-    "test": "jest"
+    "test": "jest --coverage"
   },
   "standard": {
     "env": [
