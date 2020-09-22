@@ -13,7 +13,6 @@ var Game = function () {
   const questions = new Questions()
 
   var currentPlayer = 0
-  var isGettingOutOfPenaltyBox = false
 
   var currentCategory = function () {
     const player = players.getPlayer(currentPlayer)
@@ -53,24 +52,15 @@ var Game = function () {
 
     if (player.inPenaltyBox) {
       if (roll % 2 !== 0) {
-        isGettingOutOfPenaltyBox = true
-
-        console.log(
-          player.name +
-            ' is getting out of the penalty box'
-        )
+        player.gettingOutOfThePenaltyBox(true)
         player.rollDice(roll)
         console.log('The category is ' + currentCategory())
         askQuestion()
       } else {
-        console.log(
-          player.name +
-            ' is not getting out of the penalty box'
-        )
-        isGettingOutOfPenaltyBox = false
+        player.gettingOutOfThePenaltyBox(false)
       }
     } else {
-      player.rollDice(roll);
+      player.rollDice(roll)
       console.log('The category is ' + currentCategory())
       askQuestion()
     }
@@ -90,7 +80,7 @@ var Game = function () {
   this.wasCorrectlyAnswered = function () {
     const player = players.getPlayer(currentPlayer)
     if (player.inPenaltyBox) {
-      if (isGettingOutOfPenaltyBox) {
+      if (player.isGettingOutOfThePenaltyBox) {
         this.correctAnswerWhileAbleToScore(player)
       }
     } else {
@@ -131,5 +121,3 @@ const gameRunner = (i) => {
 }
 
 export default gameRunner
-
-

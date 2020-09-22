@@ -5,6 +5,7 @@ export class Player {
     this.position = position
     this.purse = purse
     this.inPenaltyBox = inPenaltyBox
+    this.isGettingOutOfThePenaltyBox = false
   }
 
   correctAnswer () {
@@ -27,12 +28,21 @@ export class Player {
     return (this.purse === WINNING_COINS)
   }
 
-  rollDice(roll){
-    this.position += roll;
+  rollDice (roll) {
+    this.position += roll
     if (this.position > 11) {
-      this.position -= 12;
+      this.position -= 12
     }
 
-    console.log(this.name + "'s new location is " + this.position);
+    console.log(this.name + "'s new location is " + this.position)
+  }
+
+  gettingOutOfThePenaltyBox (gettingOut) {
+    this.isGettingOutOfThePenaltyBox = gettingOut
+    if (gettingOut) {
+      console.log(this.name + ' is getting out of the penalty box')
+    } else {
+      console.log(this.name + ' is not getting out of the penalty box')
+    }
   }
 }
