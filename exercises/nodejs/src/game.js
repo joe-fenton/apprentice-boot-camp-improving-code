@@ -59,16 +59,7 @@ var Game = function () {
           player.name +
             ' is getting out of the penalty box'
         )
-        player.position += roll
-        if (player.position > 11) {
-          player.position -= 12
-        }
-
-        console.log(
-          player.name +
-            "'s new location is " +
-            player.position
-        )
+        player.rollDice(roll)
         console.log('The category is ' + currentCategory())
         askQuestion()
       } else {
@@ -79,16 +70,7 @@ var Game = function () {
         isGettingOutOfPenaltyBox = false
       }
     } else {
-      player.position += roll
-      if (player.position > 11) {
-        player.position -= 12
-      }
-
-      console.log(
-        player.name +
-          "'s new location is " +
-          player.position
-      )
+      player.rollDice(roll);
       console.log('The category is ' + currentCategory())
       askQuestion()
     }

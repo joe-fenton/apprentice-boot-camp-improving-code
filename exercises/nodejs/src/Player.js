@@ -26,4 +26,13 @@ export class Player {
   didPlayerWin () {
     return (this.purse === WINNING_COINS)
   }
+
+  rollDice(roll){
+    this.position += roll;
+    if (this.position > 11) {
+      this.position -= 12;
+    }
+
+    console.log(this.name + "'s new location is " + this.position);
+  }
 }
