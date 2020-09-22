@@ -3,26 +3,18 @@ import { Player } from './Player'
 import { Players } from './Players'
 import { Questions } from './Questions'
 import { POP_CATEGORY, SCIENCE_CATEGORY, SPORTS_CATEGORY, ROCK_CATEGORY } from './Categories'
+import { Board } from './Board'
 
 var Game = function () {
+  const BOARD_SIZE = 12
   const players = new Players()
   const questions = new Questions()
+  const board = new Board(BOARD_SIZE)
 
   var currentPlayer = 0
 
   var currentCategory = function () {
-    const player = players.getPlayer(currentPlayer)
-    const currentPlace = player.position
-    if (currentPlace === 0) { return POP_CATEGORY }
-    if (currentPlace === 1) { return SCIENCE_CATEGORY }
-    if (currentPlace === 2) { return SPORTS_CATEGORY }
-    if (currentPlace === 4) { return POP_CATEGORY }
-    if (currentPlace === 5) { return SCIENCE_CATEGORY }
-    if (currentPlace === 6) { return SPORTS_CATEGORY }
-    if (currentPlace === 8) { return POP_CATEGORY }
-    if (currentPlace === 9) { return SCIENCE_CATEGORY }
-    if (currentPlace === 10) { return SPORTS_CATEGORY }
-    return ROCK_CATEGORY
+    return board.getCategoryForBoardPosition(players.getPlayer(currentPlayer).position)
   }
 
   this.gameCanStart = function (howManyPlayers) {
